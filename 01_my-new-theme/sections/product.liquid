@@ -12,6 +12,18 @@
 {% for tag in product.tags %}
 <p>{{ tag }}</p>
 {% endfor %}
+
+
+ {% if product.type != blank %}
+    {% case product.type %}
+    {% when 'snowboard' %}
+        <p>This is a snowboard</p>
+    {%  when 'ski wax' %}
+        <p>This is a ski Wax</p>
+    {% when 'gift card' %}
+        <p>This is a gift card</p>
+    {% endcase %}
+ {% endif %}
 </div>
 
 

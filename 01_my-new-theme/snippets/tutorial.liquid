@@ -1,6 +1,6 @@
 {% comment %}
 This is a comment
-{% endcomment %}
+
 
 {% assign myString =  '1234' %}
 {% assign myNumber = 1234 %}
@@ -28,3 +28,10 @@ My String {{ myString }}, <br>
  {%  if product.tags contains "Premium" %}
     <p>This is a Premium</p>
  {% endif %}
+
+ {% endcomment %}
+
+
+ {%  for product in collection.products %}
+<p style="{% if forloop.first %} color: green {% elsif forloop.last %} color: orange {% endif %}"> {{  forloop.index}}  - {{ product.title }}</p>
+ {% endfor %}
