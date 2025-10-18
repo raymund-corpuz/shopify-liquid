@@ -1,0 +1,30 @@
+{% comment %}
+This is a comment
+{% endcomment %}
+
+{% assign myString =  '1234' %}
+{% assign myNumber = 1234 %}
+{% assign myFloating = 123.4 %}
+
+My String {{ myString }}, <br>
+ My Number {{ myNumber }} <br>
+ My Floating {{  myFloating }} <br>
+
+ {% assign myBoolean = true %}
+
+ My Boolean: {{ myBoolean }} <br>
+
+ {% assign myNil = nil %}
+ My Nil: {{ myNil }} <br>
+
+ {% if myBoolean == false %}
+    <p>If condition says TRUE</p>
+ {% else %}
+ <p>The condition is FALSE</p>
+ {% endif %}
+
+ <br>
+
+ {%  if product.tags contains "Premium" %}
+    <p>This is a Premium</p>
+ {% endif %}

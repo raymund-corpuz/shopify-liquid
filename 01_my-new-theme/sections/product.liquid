@@ -5,6 +5,16 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
+<div>
+  <h2>{{ product.title }}</h2>
+  <p>{{ product.price  | money }}</p>
+
+{% for tag in product.tags %}
+<p>{{ tag }}</p>
+{% endfor %}
+</div>
+
+
 <div class="product-images">
   {% for image in product.images %}
     {% render 'image', class: 'product-image', image: image %}
