@@ -53,6 +53,10 @@ My String {{ myString }}, <br>
 
  {% endcomment %}
 
+
+ {% comment %}
+ // ===== PAGINATION OF COLLECTIONS ======== //
+ {% endcomment %}
  {% paginate collection.products by 5 %}
    {% for product in collection.products %}
       <p>{{ product.title }}</p>
@@ -60,3 +64,53 @@ My String {{ myString }}, <br>
 
    {{  paginate | default_pagination}}
  {% endpaginate %}
+
+
+  {% comment %}
+ // ===== FILTER METHODS ======== //
+ {% endcomment %}
+<br>
+<br>
+ {% assign myString = "HELLO world" %}
+{% assign myOtherString = 'some EXTRA text' %}
+<p>{{ myString | downcase | append: myOtherString |downcase }}</p>
+<br>
+{%  assign myStringWithWhitespace = "               Hello this has a whitespace      " %}
+<p>{{ myStringWithWhitespace | append: '!' }}</p>
+
+
+{% assign myHtmlText = "<p style='color: red'>Hello</p>" %}
+{{ myHtmlText | strip_html}}
+
+{% assign myLongString = 'This is some very long text that will be tripped' %}
+<p>{{ myLongString | truncatewords: 3}}</p>
+
+{% assign myMultilineText = "This is the first line
+   This is the second line
+   This is the third line" |newline_to_br %}
+
+   <p>{{ myMultilineText }}</p>
+
+   <br>
+   {% assign myText = "Hello some extra text some extra text" %}
+   <p>{{ myText | replace: 'text', 'string' }}</p>
+
+   {% comment %}
+   // ======== FILTER ARRAY ============ // 
+   {% endcomment %}
+    {% assign myNumbers = '1,2,3,4' | split: ',' %}
+
+    {% for num in myNumbers %}
+      <p>{{ num }}</p>
+    {% endfor %}
+
+    {%  assign products =  collection.products %}
+    {% assign productTitles =  products | map:'title' %}
+
+    {% for prodTitle in productTitles %}
+      <p>{{ prodTitle }}</p>
+    {% endfor %}
+
+    {% for prod in products %}
+      <p>{{ prod.title }} - {{ prod.price | money }}</p>
+    {% endfor %}
