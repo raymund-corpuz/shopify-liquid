@@ -56,7 +56,7 @@ My String {{ myString }}, <br>
 
  {% comment %}
  // ===== PAGINATION OF COLLECTIONS ======== //
- {% endcomment %}
+ 
  {% paginate collection.products by 5 %}
    {% for product in collection.products %}
       <p>{{ product.title }}</p>
@@ -64,6 +64,8 @@ My String {{ myString }}, <br>
 
    {{  paginate | default_pagination}}
  {% endpaginate %}
+
+ {% endcomment %}
 
 
   {% comment %}
@@ -111,6 +113,39 @@ My String {{ myString }}, <br>
       <p>{{ prodTitle }}</p>
     {% endfor %}
 
-    {% for prod in products %}
+    {% assign priceSortedItems =  products | sort: 'price' %}
+    {% for prod in priceSortedItems %}
       <p>{{ prod.title }} - {{ prod.price | money }}</p>
     {% endfor %}
+
+    {% assign allPrices =  products |map: 'price' | sort %}
+    {% for price in allPrices %}
+      <p> Price : {{ price | money}}</p>
+    {% endfor %}
+
+    {%  assign sumOfPrices =  allPrices | sum %}
+    <p>Total of all items: {{ sumOfPrices |money}}</p>
+
+    <br>
+    <p>{{ collection.description | default: 'This is a default description' }}</p>
+
+    <p>{{ 'This is some text with more text' | highlight: 'text' }}</p>
+
+    <style>
+      .highlight{
+      background:yellow;}
+    </style>
+
+    <br>
+    <p>Copyright {{ 'now' | date: '%Y-%m-%d' }}</p>
+
+    {{ collection.products.first.featured_image | image_url: width: 200, height:200 | image_tag  }}
+
+    {% liquid
+      
+      assign myUltVariable = 10
+
+      for product in collection.products
+      echo '<p>' | append: product.title | append: '</p>'
+      endfor
+    %}
