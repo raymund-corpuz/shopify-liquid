@@ -29,9 +29,34 @@ My String {{ myString }}, <br>
     <p>This is a Premium</p>
  {% endif %}
 
- {% endcomment %}
+ 
 
 
  {%  for product in collection.products %}
 <p style="{% if forloop.first %} color: green {% elsif forloop.last %} color: orange {% endif %}"> {{  forloop.index}}  - {{ product.title }}</p>
  {% endfor %}
+
+
+ <h2>FOR TAG OF PRODUCTS</h2>
+ {%  if product.tags.size > 0 %}
+   <h3>Tags</h3>
+   <ul>
+   {% for tag in product.tags %}
+   <li> Product Index: {{ forloop.index }} | Tag: {{ tag }}</li>
+   {% endfor %}
+ </ul>
+ {% endif %}
+
+ {% for i in (11..15) %}
+   <p>Hello World {{  i }} | {{ forloop.index }}</p>
+ {% endfor %}
+
+ {% endcomment %}
+
+ {% paginate collection.products by 5 %}
+   {% for product in collection.products %}
+      <p>{{ product.title }}</p>
+   {% endfor %}
+
+   {{  paginate | default_pagination}}
+ {% endpaginate %}
