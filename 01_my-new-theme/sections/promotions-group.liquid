@@ -1,19 +1,57 @@
-<section>
-    <h2>{{ section.settings.title }}</h2>
+<section class="promotion-section" style="text-align : {{ section.settings.title_alignment  }}">
+  <h2>{{ section.settings.title }}</h2>
 </section>
 
 {% schema %}
 {
-"name": "Promotions Group",
-"tag": "section",
-"class": "promotion-section",
-"settings": [
+  "name": "Promotions Group",
+  "settings": [
     {
-    "type": "text",
-    "id": "title",
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Latest Promotions"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    
+  ],
+  "blocks":[
+    {
+        "type": "promotion",
+        "name": "promotion",
+        "settings":[{
+        "type": "text",
+    "id": "promotion",
     "label": "Title"
-    }
-]
 }
-
+            ,{
+        "type": "image_picker",
+        "id":"image",
+        "label": "Image"
+    }]
+    }
+],
+  "presets": [
+    {
+      "name": "Promotions Group",
+      "blocks": [
+        {
+        "type": "promotion",
+    },{
+        "type": "promotion",
+    }
+      ]
+    }
+  ]
+}
 {% endschema %}
