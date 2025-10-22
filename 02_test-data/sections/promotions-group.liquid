@@ -1,0 +1,107 @@
+{% comment %}
+step 1: Create schema
+=>create a name
+=>create a tag :section
+=>create a class 
+=>create settings: []
+
+{% endcomment %}
+
+<section class="prmotions-container" style="font-size: {{ section.settings.font_size }}px;
+    font-weight: {% if section.settings.bold_text %} bold {% else %} normal {% endif %};
+    text-align: {{ section.settings.position }};
+    " 
+>
+   <h2> {{ section.settings.title }}</h2>
+   <p>{{ section.settings.description }}</p>
+
+   <p>Quantity: {{ section.settings.quantity }}</p>
+
+   <p>Type Selected: {{ section.settings.promo_type }}</p>
+</section>
+
+{% schema %}
+{
+    "name": "Promotions Group",
+    "tag": "section",
+    "class": "promotions-container",
+    "settings":[
+        {
+            "type": "text", // text
+            "id":"title",
+            "label": "Title",
+            "default": "Our Promotions"
+        },
+        {
+            "type": "textarea", //textarea
+            "id": "description",
+            "label": "Description",
+            "default": "This section demonstrates all input types you can use in Shopify"
+        },
+         {
+            "type": "checkbox", // checkbox
+            "id": "bold_text",
+            "label": "Make title bold",
+            "default": true
+        },
+        {
+            "type":"number", //number
+            "id": "quantity",
+            "label": "Quantity",
+            "default": 10 
+        },
+
+        {
+            "type": "range", //range
+            "id": "font_size",
+            "min": 12,
+            "max": 48,
+            "step": 1,
+            "unit": "px",
+            "label": "Font size",
+            "default": 20
+        },
+        {
+            "type": "radio",
+            "id": "promo_type",
+            "label": "Promotion Type",
+            "options": [
+                {"value": "discount", "label": "Discount"},
+                {"value": "free_shipping", "label": "Free Shipping"},
+                {"value": "bundle", "label": "Bundle Offer"},
+            ],
+            "default": "discount"
+        }
+       ,
+        {
+            "type": "select",
+            "id": "position",
+            "label": "Title Position",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+
+                },
+            ],
+            "default": "center"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Promotion Setting"
+        }
+    ]
+}
+
+{% endschema %}
