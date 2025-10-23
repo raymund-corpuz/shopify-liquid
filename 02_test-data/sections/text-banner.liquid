@@ -1,8 +1,12 @@
 
-<section class="text-container" style="width: 500px; margin: 0 auto; padding: 20px;background-color: transparent;" >
+{% if template == "index" %}
+
+    <section class="text-container" style="width: 500px; margin: 0 auto; padding: 20px;background-color: transparent;" >
     <h2 style="text-align: center;  ">{{ section.settings.title }}</h2>
     <p style="text-align: center;">{{ section.settings.description }}</p>
 </section>
+
+{% endif %}
 
 {% schema %}
 {

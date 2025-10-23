@@ -1,0 +1,62 @@
+
+<section class="image-with-text">
+   {% if section.settings.show_image %}
+    {% if section.settings.image %}
+         <img src="{{ section.settings.image | image_url: width: 600 }}" alt="{{ section.settings.title |escape }}"  class="image-with-text__image">
+    {% endif %}
+    {% endif %}
+
+    <h2 class="image-with-text__title">{{ section.settings.title }}</h2>
+
+</section>
+
+<style>
+    .image-with-text{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .image-with-text__image{
+        max-width: 800px;
+        border-radius:12px;
+    }
+    .image-with-text__title{
+        font-size: 1.8rem;
+        margin-top: 1.2rem;
+    }
+
+</style>
+
+
+{% schema %}
+
+{
+    "name": "Image with text",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Upload image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Your section title"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_image",
+            "label": "Show image",
+            "default": true
+        },
+    ],
+    "presets": [
+        {
+            "name": "Image with Text"
+        }
+    ]
+}
+
+{% endschema %}
