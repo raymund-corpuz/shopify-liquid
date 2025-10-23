@@ -1,0 +1,87 @@
+<section>
+    <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8">{{ section.settings.title }}</h2>
+
+        <div class="grid md:grid-cols-{{ section.settings.columns }} gap-6">
+            {% for block in section.blocks %}
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <p class="italic text-gray-700 mb-4">"{{ block.settings.text }}"</p>
+                    <p class="font-semibold text-lg text-blue-600">{{ block.settings.name }}</p>
+                    <p class="text-yellow-500 mt-2">
+                        {% for i in (1..block.settings.stars) %}
+                            ⭐
+                        {% endfor %}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+
+{% schema %}
+{
+    "name": "Testimonials Section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Section Title",
+            "default": "What Our Customers Say"
+        },
+        {
+            "type": "color",
+            "id": "bg_color",
+            "label": "Background Color",
+            "default": "#f9fafb"
+        },
+        {
+            "type": "range",
+            "id": "columns",
+            "label": "Testimonials per row",
+            "min": 1,
+            "max": 3,
+            "step": 1,
+            "default": 3
+        },
+    ],
+    "blocks": [
+        {
+            "type": "testimonial",
+            "name": "Testimonial",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Customer Name",
+                    "default": "John Doe"
+                },
+                 {
+                    "type": "textarea",
+                    "id": "text",
+                    "label": "Testimonial Text",
+                    "default": "This store is absolutely amazing! The Products exceeded my expectation"
+                },
+                 {
+                    "type": "range",
+                    "id": "stars",
+                    "label": "Star Rating",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default": 5
+                }
+
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Testimonials Section",
+            "category": "Testimonials"
+        }
+    ]
+}
+
+{% endschema %}
