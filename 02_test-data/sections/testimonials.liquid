@@ -1,8 +1,8 @@
-<section>
-    <div class="max-w-5xl mx-auto text-center">
+{% comment %} <section>
+    <div class=" max-w-5xl mx-auto text-center">
         <h2 class="text-3xl font-bold mb-8">{{ section.settings.title }}</h2>
 
-        <div class="grid md:grid-cols-{{ section.settings.columns }} gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-{{ section.settings.columns }} gap-6">
             {% for block in section.blocks %}
                 <div class="bg-white p-6 rounded-xl shadow">
                     <p class="italic text-gray-700 mb-4">"{{ block.settings.text }}"</p>
@@ -17,7 +17,31 @@
         </div>
 
     </div>
+</section> {% endcomment %}
+
+<section class=" w-full" style="background-color: {{ section.settings.bg_color }};">
+  <div class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">
+      {{ section.settings.title }}
+    </h2>
+
+    <div class="flex flex-col  md:flex-row justify-center gap-8 sm: ">
+      {% for block in section.blocks %}
+        <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition-transform duration-300 transform hover:-translate-y-1">
+          <p class="italic text-gray-700 mb-4">"{{ block.settings.text }}"</p>
+          <p class="font-semibold text-center text-lg text-blue-600">{{ block.settings.name }}</p>
+          <div class="flex justify-center text-yellow-500 mt-3">
+            {% for i in (1..block.settings.stars) %}
+              ⭐
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
+
+
 
 
 {% schema %}
