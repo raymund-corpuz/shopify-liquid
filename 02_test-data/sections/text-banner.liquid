@@ -1,0 +1,33 @@
+
+<section class="text-container" style="width: 500px; margin: 0 auto; padding: 20px;background-color: transparent;" >
+    <h2 style="text-align: center;  ">{{ section.settings.title }}</h2>
+    <p style="text-align: center;">{{ section.settings.description }}</p>
+</section>
+
+{% schema %}
+{
+    "name":"Text Banner",
+    "tag": "section",
+    "class": "text-container",
+    "settings": [
+        {
+         "type": "text",
+          "id": "title",
+          "label": "Text Banner",
+          "default": "Welcome Banner"
+        },
+        {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "This is a short description"
+        }
+    ],
+    "presets":[
+        {
+            "name": "My Text Banner"
+        }
+    ]
+}
+
+{% endschema %}
