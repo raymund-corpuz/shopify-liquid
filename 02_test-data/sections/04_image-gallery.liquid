@@ -1,0 +1,78 @@
+<section
+  class="py-12"
+  style="background-color: {{ section.settings.bg_color }};"
+>
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-8">
+      {{ section.settings.title }}
+    </h2>
+
+    <div
+      class="grid grid-cols-2 md:grid-cols-4 gap-4"
+    >
+      {% for block in section.blocks %}
+        {% if block.settings.image %}
+          <div
+            class="
+              overflow-hidden rounded-lg
+              {% if section.settings.show_border %}
+                border-4 border-gray-300
+              {% endif %}
+            "
+          >
+            <img
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              alt="Gallery Image"
+              class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            />
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Gallery"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show Border Around Images",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Gallery Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Gallery",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}
