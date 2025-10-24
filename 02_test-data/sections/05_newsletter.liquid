@@ -1,0 +1,68 @@
+<section class="p-4 w-5xl">
+
+  <h2 class="font-bold text-3xl text-gray-800 text-{{ section.settings.text_align }}">{{ section.settings.title }}</h2>
+  <p class=" text-gray-800 text-{{ section.settings.text_align }}">{{ section.settings.sub-title }}</p>
+
+  <form class="flex flex-col sm:flex-row justify-center items-center gap-2  my-4">
+    <input type="text" class="w-5xl sm:w-2/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email address" />
+   <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 " >Submit</button>
+  </form>
+
+</section>
+
+
+{% schema %}
+{
+  "name": "Newsletter Signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join Our Newsletter"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        }, {
+          "value": "center",
+          "label": "Center"
+        }, {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "text",
+      "id": "sub-title",
+      "label": "Sub title",
+      "default": "Be the first to know about new products and exclusive offers."
+    },
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Signup"  
+    }
+  ]
+}
+
+{% endschema %}
