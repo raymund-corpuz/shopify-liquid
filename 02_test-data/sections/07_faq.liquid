@@ -1,0 +1,65 @@
+
+<section class="max-w-3xl mx-auto py-12 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">{{ section.settings.title }}</h2>
+
+    <div class="space-y-4">
+
+        {% for block in section.blocks %}
+            <details class="border rounded-xl p-4 bg-white shadow-sm">
+                <summary class="cursor-pointer font-semibold text-lg text-gray-800 flex justify-between items-center">
+
+                    {{ block.settings.question }}
+                    <span class="text-blue-600">+</span>
+                    
+                </summary>
+                <p>{{ block.settings.answer }}</p>
+            </details>
+        {% endfor %}
+
+
+    </div>
+
+</section>
+
+{% schema %}
+{
+    "name": "FAQ Section",
+    "settings": [
+        {
+            "type":"text",
+            "id": "title",
+            "label": "Section Title",
+            "default": "Frequently Asked Questions"
+        }
+    ],
+    "blocks": [ 
+        { 
+            "type": "faq",
+            "name": "FAQ Item",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "question",
+                    "label": "Question",
+                    "default": "What is your return policy?"
+                },
+                {
+                    "type": "text",
+                    "id": "answer",
+                    "label": "Answer",
+                    "default": "You can return any product within 30 days of purchase"
+                }
+            ]
+        }
+    ],
+    "presets": [ 
+        {
+            "name": "FAQ Section",
+            "category": "Information"    
+        }
+    ]
+
+
+}
+
+{% endschema %}
