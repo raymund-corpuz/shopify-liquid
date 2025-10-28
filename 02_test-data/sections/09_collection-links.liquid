@@ -1,4 +1,100 @@
 
+
+{% liquid
+  assign collection_list = section.settings.collection_list
+
+  if collection_list == blank
+    assign limit = 4
+
+    for i in (1..4)
+      assign collection_list = collection_list | append: ', '
+    endfor
+
+    assign collection_list = collection_list | split: ','
+  endif
+
+  assign active_collection = collection_list | find: 'id', collection.id | default: collection_list.first
+%}
+
+<script
+  src="{{ 'collection-links.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <collection-links-component
+    layout="{{ section.settings.layout }}"
+    alignment="{{ section.settings.alignment }}"
+    {% if section.settings.image_position == 'left' %}
+      reverse
+    {% endif %}
+  >
+    <div
+      class="collection-links__container"
+      ref="container"
+    >
+      {% for collection in collection_list limit: limit %}
+        {% liquid
+          assign current = false
+
+          if collection.id == active_collection.id
+            assign current = true
+          endif
+        %}
+        {% content_for 'block',
+          type: '_collection-link',
+          id: 'link',
+          closest.collection: collection,
+          index: forloop.index0,
+          current: current
+        %}
+      {% endfor %}
+    </div>
+
+    {% case section.settings.layout %}
+      {% when 'spotlight' %}
+        {% capture slides %}
+          {% for collection in collection_list limit: limit %}
+          {% liquid
+            assign current = false
+
+            if collection.id == active_collection.id
+              assign current = true
+            endif
+          %}
+
+          {% capture slide %}
+            {% # theme-check-disable UniqueStaticBlockId %}
+            {% content_for 'block',
+              type: '_collection-link',
+              id: 'link',
+              closest.collection: collection,
+              index: forloop.index0,
+              current: current,
+              image_only: true
+            %}
+            {% # theme-check-enable UniqueStaticBlockId %}
+          {% endcapture %}
+
+          {% render 'slideshow-slide', children: slide, index: forloop.index0 %}
+        {% endfor %}
+      {% endcapture %}
+
+        {% render 'slideshow',
+          slides: slides,
+          slide_count: collection_list.size,
+          class: 'collection-links__images',
+          ref: 'slideshow'
+        %}
+    {% endcase %}
+  </collection-links-component>
+</div>
+
 {% # theme-check-disable ValidBlockTarget %}
 {% stylesheet %}
   collection-links-component {
@@ -273,4 +369,3 @@
 }
 {% endschema %}
 {% # theme-check-enable ValidBlockTarget %}
-
